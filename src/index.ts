@@ -10,7 +10,8 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use("/updateUser", updateUser);
+app.post("/updateUser", updateUser);
+app.use("/get");
 
 exports.createUser = createUser;
 exports.api = functions.https.onRequest(app);
