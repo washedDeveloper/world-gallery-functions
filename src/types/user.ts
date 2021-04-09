@@ -3,4 +3,5 @@ export default interface User {
   description: string;
   latitude: number;
   longitude: number;
+  uid: string;
 }
