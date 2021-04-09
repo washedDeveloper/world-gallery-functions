@@ -10,6 +10,7 @@ const createUser = functions.auth.user().onCreate(async (user) => {
     description: "",
     latitude: 0,
     longitude: 0,
+    uid: user.uid,
   };
 
   return await db.collection("users").doc(user.uid).set(emptyUser);
