@@ -4,13 +4,17 @@ import * as admin from "firebase-admin";
 const updateUser = async (req: express.Request, res: express.Response) => {
   const db = admin.firestore();
   const user = db.collection("users").doc(`${req.body.uid}`);
-  if (user) {
+  const galleries = db.collection("galleries").doc(`${req.body.uid}`);
+  if (user && galleries) {
     try {
       await user.update({
         latitude: req.body.latitude,
         longitude: req.body.longitude,
         description: req.body.description,
         name: req.body.name,
+      });
+      await galleries.create({
+        pieces: [],
       });
       return res.status(200).json({
         error: false,
