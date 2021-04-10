@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as admin from "firebase-admin";
+import { v4 as uuidv4 } from "uuid";
 
 const addPiece = async (req: express.Request, res: express.Response) => {
   const db = admin.firestore();
@@ -13,6 +14,7 @@ const addPiece = async (req: express.Request, res: express.Response) => {
           likes: 0,
           title: req.body.title,
           fileName: req.body.fileName,
+          id: uuidv4(),
         }),
       });
       return res.status(200).json({
