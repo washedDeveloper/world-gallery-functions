@@ -3,7 +3,7 @@ import * as admin from "firebase-admin";
 
 // GET /getAllPieces?user=
 const getAllPieces = async (req: express.Request, res: express.Response) => {
-  if (req.query.user) {
+  if (!req.query.user) {
     return res.status(500).json({
       error: true,
       messag: "missing user query. try add ?user=USERID",
