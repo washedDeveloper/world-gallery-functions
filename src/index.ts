@@ -8,6 +8,7 @@ import updateUser from "./updateUser";
 import addPiece from "./addPiece";
 import search from "./search";
 import getAllPieces from "./getAllPieces";
+import discoverAll from "./discoverAll";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.post("/updateUser", updateUser);
 app.get("/search", search);
 app.post("/addPiece", addPiece);
 app.get("/getAllPieces", getAllPieces);
+app.get("/discoverAll", discoverAll);
 
 exports.createUser = createUser;
 exports.api = functions.https.onRequest(app);
