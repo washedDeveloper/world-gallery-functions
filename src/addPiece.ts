@@ -7,15 +7,21 @@ const addPiece = async (req: express.Request, res: express.Response) => {
   const userGallery = db.collection("galleries").doc(`${req.body.uid}`);
   if (userGallery) {
     try {
+      const pieceID = uuidv4();
+      const pieces = db.collection("pieces").doc(pieceID);
       await userGallery.update({
         pieces: admin.firestore.FieldValue.arrayUnion({
-          description: req.body.description,
-          imageURL: req.body.imageURL,
-          likes: 0,
-          title: req.body.title,
-          fileName: req.body.fileName,
-          id: uuidv4(),
+          id: pieceID,
         }),
+      });
+      await pieces.set({
+        title: req.body.title,
+        description: req.body.description,
+        fileName: req.body.fileName,
+        imageURL: req.body.imageURL,
+        likes: 0,
+        uid: req.body.uid,
+        id: pieceID,
       });
       return res.status(200).json({
         error: false,
